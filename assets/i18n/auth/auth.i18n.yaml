@@ -1,0 +1,8 @@
+register: Register
+login: Login
+password: password
+name: Full name
+email: Email
+repeat: Repeat @:auth.password
+forgot: Forgot password
+reset: Reset password
