@@ -1,5 +1,5 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shibringo/config/config.dart';
 import 'package:shibringo/domain/router.dart';
@@ -16,59 +16,57 @@ class AuthView extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.transparent, leading: const ButtonWidget()),
+          backgroundColor: Colors.transparent,
+          leading: const ButtonWidget(),
+          actions: [
+            Padding(
+                padding:
+                    const EdgeInsets.only(right: AppConstants.kDefaultPadding),
+                child: FilledButton(
+                    onPressed: () => context.goNamed(AppViews.home),
+                    child: Text('skip')))
+          ],
+        ),
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         body: Stack(children: [
           const ImageWidget(url: url),
           Padding(
               padding: AppConstants.kDefaultPaddingWithoutTop,
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                TitleWidget(text: 'Create an Account'),
-                Gap(AppConstants.kDefaultPadding),
-                DescriptionWidget(
-                    text:
-                        'Солнце взошло, окрасив небо в яркие оттенки розового и оранжевого. Легкий ветерок приятно шевелит волосы, создавая ощущение свободы и спокойствия.'),
-                Gap(AppConstants.kDefaultPadding),
-                Row(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Expanded(
-                        child: ElevatedButton(
-                            onPressed: () => context.goNamed(AppViews.signUp),
-                            child: Text(t.auth.register))),
-                  ],
-                ),
-                Gap(AppConstants.kDefaultPadding / 2),
-                Row(
-                  children: [
-                    Expanded(
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStatePropertyAll(Colors.white),
-                                backgroundColor: MaterialStatePropertyAll(
-                                    AppColors.darkSecondaryColor)),
-                            onPressed: () {},
-                            child: Text('GOOGLE'))),
-                    Gap(AppConstants.kDefaultPadding / 2),
-                    Expanded(
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStatePropertyAll(Colors.white),
-                                backgroundColor: MaterialStatePropertyAll(
-                                    AppColors.darkSecondaryColor)),
-                            onPressed: () {},
-                            child: Text('GOOGLE'))),
-                  ],
-                ),
-                Gap(AppConstants.kDefaultPadding),
-                Text(
-                  'Have account? Login',
-                  style: TextStyle(color: Colors.white),
-                )
-              ]))
+                    TitleWidget(text: 'Create an Account'),
+                    AppConstants.kDefaultBodyPadding,
+                    DescriptionWidget(
+                        text:
+                            'Солнце взошло, окрасив небо в яркие оттенки розового и оранжевого. Легкий ветерок приятно шевелит волосы, создавая ощущение свободы и спокойствия.'),
+                    AppConstants.kDefaultBodyPadding,
+                    Row(
+                      children: [
+                        Expanded(
+                            child: ElevatedButton(
+                                onPressed: () =>
+                                    context.goNamed(AppViews.signUp),
+                                child: Text(t.auth.register))),
+                      ],
+                    ),
+                    AppConstants.kDefaultBodySmallPadding,
+                    const SocialButtons(),
+                    AppConstants.kDefaultBodyPadding,
+                    Center(
+                      child: Text.rich(
+                          t.auth.go_login(
+                              tapHere: (v) => TextSpan(
+                                  text: v,
+                                  style: TextStyle(color: Colors.white),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap =
+                                        () => context.goNamed(AppViews.login))),
+                          style: TextStyle(color: Colors.white70)),
+                    )
+                  ]))
         ]));
   }
 }

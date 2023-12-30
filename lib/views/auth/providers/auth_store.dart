@@ -24,6 +24,22 @@ abstract class _AuthStore with Store {
     }
   }
 
+  @observable
+  bool isShowPassword = false;
+
+  @observable
+  bool isShowResetPassword = false;
+
+  @action
+  void setIsShowPassword(bool v) {
+    isShowPassword = v;
+  }
+
+  @action
+  void setIsShowResetPassword(bool v) {
+    isShowResetPassword = v;
+  }
+
   void dispose() {
     dispose();
   }

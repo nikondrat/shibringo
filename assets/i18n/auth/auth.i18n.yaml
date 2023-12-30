@@ -6,3 +6,5 @@ email: Email
 repeat: Repeat @:auth.password
 forgot: Forgot password
 reset: Reset password
+go_login(rich): Already have an account? ${tapHere(@:auth.login)}
+terms_hint(rich): By registering, you accept the \n${tapHere(Terms and Conditions)} 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:shibringo/domain/di/di.dart';
 import 'package:shibringo/domain/router.dart';
 import 'package:shibringo/views/auth/providers/auth_store.dart';
@@ -75,7 +74,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             Padding(
               padding:
                   const EdgeInsets.only(right: AppConstants.kDefaultPadding),
-              child: TextButton(
+              child: FilledButton(
                   onPressed: () => router.goNamed(AppViews.auth),
                   child: Text('skip')),
             )
@@ -108,9 +107,9 @@ class _Page extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TitleWidget(text: data.title),
-                const Gap(AppConstants.kDefaultPadding),
+                AppConstants.kDefaultBodyPadding,
                 DescriptionWidget(text: data.description),
-                const Gap(AppConstants.kDefaultPadding),
+                AppConstants.kDefaultBodyPadding,
                 NavigationWidget(controller: controller)
               ]))
     ]);

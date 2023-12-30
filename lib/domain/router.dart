@@ -19,6 +19,12 @@ final GoRouter router = GoRouter(routes: [
               GoRoute(
                   name: AppViews.login,
                   path: _Paths.login,
+                  routes: [
+                    GoRoute(
+                        name: AppViews.forgotPassword,
+                        path: _Paths.forgotPassword,
+                        builder: (context, state) => const ForgotPasswordView())
+                  ],
                   builder: (context, state) => const LoginView()),
               GoRoute(
                   name: AppViews.signUp,
@@ -38,6 +44,7 @@ abstract class AppViews {
   static const auth = 'auth';
   static const login = 'login';
   static const signUp = 'signUp';
+  static const forgotPassword = 'forgotPassword';
 }
 
 abstract class _Paths {
@@ -48,4 +55,5 @@ abstract class _Paths {
   static const auth = AppViews.auth;
   static const login = AppViews.login;
   static const signUp = AppViews.signUp;
+  static const forgotPassword = AppViews.forgotPassword;
 }

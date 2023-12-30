@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 9
+/// Strings: 11
 ///
-/// Built on 2023-12-29 at 16:15 UTC
+/// Built on 2023-12-30 at 14:30 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -166,6 +166,14 @@ class _StringsAuthEn {
 	String get repeat => 'Repeat ${_root.auth.password}';
 	String get forgot => 'Forgot password';
 	String get reset => 'Reset password';
+	TextSpan go_login({required InlineSpanBuilder tapHere}) => TextSpan(children: [
+		const TextSpan(text: 'Already have an account? '),
+		tapHere('${_root.auth.login}'),
+	]);
+	TextSpan terms_hint({required InlineSpanBuilder tapHere}) => TextSpan(children: [
+		const TextSpan(text: 'By registering, you accept the \n'),
+		tapHere('Terms and Conditions'),
+	]);
 }
 
 // Path: common
@@ -192,6 +200,14 @@ extension on Translations {
 			case 'auth.repeat': return 'Repeat ${_root.auth.password}';
 			case 'auth.forgot': return 'Forgot password';
 			case 'auth.reset': return 'Reset password';
+			case 'auth.go_login': return ({required InlineSpanBuilder tapHere}) => TextSpan(children: [
+				const TextSpan(text: 'Already have an account? '),
+				tapHere('${_root.auth.login}'),
+			]);
+			case 'auth.terms_hint': return ({required InlineSpanBuilder tapHere}) => TextSpan(children: [
+				const TextSpan(text: 'By registering, you accept the \n'),
+				tapHere('Terms and Conditions'),
+			]);
 			case 'common.app_name': return 'shibringo';
 			default: return null;
 		}
