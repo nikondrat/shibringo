@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:shibringo/domain/router.dart';
+import 'package:shibringo/domain/utils/utils.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../config/config.dart';
@@ -33,33 +36,34 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: ButtonWidget()),
-      floatingActionButton: FloatingActionButton.extended(
-          label: Text('Next'),
-          icon: Icon(UniconsLine.arrow_right),
-          onPressed: () {}),
-      body: ReactiveForm(
-        formGroup: group,
-        child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-                AppConstants.kDefaultPadding,
-                AppConstants.kDefaultPadding * 10,
-                AppConstants.kDefaultPadding,
-                AppConstants.kDefaultPadding),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TitleWidget(text: t.auth.forgot),
-                  AppConstants.kDefaultBodyPadding,
-                  DescriptionWidget(text: 'noidfosfksd'),
-                  AppConstants.kDefaultBodyPadding,
-                  ReactiveTextField(
-                    formControlName: 'email',
-                    decoration: InputDecoration(labelText: t.auth.email),
-                  )
-                ])),
-      ),
-    );
+        appBar: AppBar(leading: const ButtonWidget()),
+        floatingActionButton: FloatingActionButton.extended(
+            label: Text(t.common.next),
+            icon: const Icon(UniconsLine.arrow_right),
+            onPressed: () => context.goNamed(AppViews.reset)),
+        body: ReactiveForm(
+            formGroup: group,
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    AppConstants.kDefaultPadding,
+                    AppConstants.kDefaultPadding * 10,
+                    AppConstants.kDefaultPadding,
+                    AppConstants.kDefaultPadding),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TitleWidget(
+                          text: t.auth.forgot(
+                              v: '\n${StringUtil.capitalize(t.auth.password)}')),
+                      AppConstants.kDefaultBodyPadding,
+                      DescriptionWidget(text: 'noidfosfksd'),
+                      AppConstants.kDefaultBodyPadding,
+                      ReactiveTextField(
+                          formControlName: 'email',
+                          decoration: InputDecoration(
+                              labelText: t.auth.email,
+                              hintText: t.auth.example.email))
+                    ]))));
   }
 }

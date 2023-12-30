@@ -1,14 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:shibringo/config/constants.dart';
-import 'package:shibringo/domain/di/di.dart';
 import 'package:shibringo/domain/router.dart';
 import 'package:shibringo/domain/utils/utils.dart';
 import 'package:shibringo/gen/i18n/strings.g.dart';
-import 'package:shibringo/views/auth/providers/auth_store.dart';
 import 'package:shibringo/views/auth/widgets/widgets.dart';
 import 'package:unicons/unicons.dart';
 
@@ -55,7 +52,8 @@ class SignUpView extends StatelessWidget {
               Row(children: [
                 Expanded(
                     child: ElevatedButton(
-                        onPressed: () {}, child: Text(t.auth.register)))
+                        onPressed: () => context.goNamed(AppViews.accountSetup),
+                        child: Text(t.auth.register)))
               ])
             ])));
   }
@@ -70,7 +68,8 @@ class _Inputs extends StatefulWidget {
 
 class __InputsState extends State<_Inputs> {
   late final FormGroup formGroup;
-  final AuthStore store = DI.i.get();
+
+  bool isShowPassword = false;
 
   @override
   void initState() {
@@ -79,10 +78,7 @@ class __InputsState extends State<_Inputs> {
       'email': FormControl(validators: [Validators.email, Validators.required]),
       'password': FormControl(
           validators: [Validators.required, Validators.minLength(8)]),
-      'repeat': FormControl(validators: [Validators.required])
-    }, validators: [
-      const MustMatchValidator('password', 'repeat', true)
-    ]);
+    });
     super.initState();
   }
 
@@ -99,53 +95,35 @@ class __InputsState extends State<_Inputs> {
         child: Column(children: [
           AppConstants.kDefaultBodyPadding,
           ReactiveTextField(
-            formControlName: 'name',
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(labelText: t.auth.name),
-          ),
+              formControlName: 'name',
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  labelText: t.auth.name, hintText: t.auth.example.name)),
           AppConstants.kDefaultBodyPadding,
           ReactiveTextField(
-            formControlName: 'email',
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(labelText: t.auth.email),
-          ),
+              formControlName: 'email',
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  labelText: t.auth.email, hintText: t.auth.example.email)),
           AppConstants.kDefaultBodyPadding,
-          Observer(
-              builder: (_) => ReactiveTextField(
-                  formControlName: 'password',
-                  obscureText: !store.isShowPassword,
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: t.auth.password,
-                      suffixIcon: Padding(
-                          padding: AppConstants.kDefaultActionPadding,
-                          child: IconButton(
-                              onPressed: () => store
-                                  .setIsShowPassword(!store.isShowPassword),
-                              icon: store.isShowPassword
-                                  ? const Icon(UniconsLine.eye_slash)
-                                  : const Icon(UniconsLine.eye))),
-                      labelText: StringUtil.capitalize(t.auth.password)))),
-          AppConstants.kDefaultBodyPadding,
-          Observer(
-              builder: (_) => ReactiveTextField(
-                  formControlName: 'repeat',
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: !store.isShowResetPassword,
-                  decoration: InputDecoration(
-                      labelText: t.auth.repeat,
-                      suffixIcon: Padding(
-                          padding: AppConstants.kDefaultActionPadding,
-                          child: IconButton(
-                              onPressed: () => store.setIsShowResetPassword(
-                                  !store.isShowResetPassword),
-                              icon: store.isShowResetPassword
-                                  ? const Icon(UniconsLine.eye_slash)
-                                  : const Icon(UniconsLine.eye))))))
+          ReactiveTextField(
+              formControlName: 'password',
+              obscureText: !isShowPassword,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.visiblePassword,
+              decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  hintText: t.auth.example.password,
+                  suffixIcon: Padding(
+                      padding: AppConstants.kDefaultActionPadding,
+                      child: IconButton(
+                          onPressed: () =>
+                              setState(() => isShowPassword = !isShowPassword),
+                          icon: isShowPassword
+                              ? const Icon(UniconsLine.eye_slash)
+                              : const Icon(UniconsLine.eye))),
+                  labelText: StringUtil.capitalize(t.auth.password))),
         ]));
   }
 }

@@ -24,7 +24,7 @@ class AuthView extends StatelessWidget {
                     const EdgeInsets.only(right: AppConstants.kDefaultPadding),
                 child: FilledButton(
                     onPressed: () => context.goNamed(AppViews.home),
-                    child: Text('skip')))
+                    child: Text(t.common.skip)))
           ],
         ),
         resizeToAvoidBottomInset: false,

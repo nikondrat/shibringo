@@ -1,0 +1,9 @@
+first_view(map):
+  title: Share Your Recipes
+  description: Get feedback on the recipe
+second_view(map):
+  title: Learn To Cook
+  description: Find out the recipes of experienced chefs
+third_view(map):
+  title: Become a Master Chef
+  description: Cook, experiment, share

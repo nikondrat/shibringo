@@ -38,7 +38,11 @@ dependencies:
   auto_size_text: ^3.0.0
   extended_image: ^8.2.0
   reactive_forms: ^16.1.1
+  fluid_bottom_nav_bar: ^1.4.0
   smooth_page_indicator: ^1.1.0
+
+  # utils
+  image_picker: ^1.0.5
 
   # network
   dio: ^5.4.0

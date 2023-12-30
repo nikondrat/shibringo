@@ -23,12 +23,23 @@ final GoRouter router = GoRouter(routes: [
                     GoRoute(
                         name: AppViews.forgotPassword,
                         path: _Paths.forgotPassword,
-                        builder: (context, state) => const ForgotPasswordView())
+                        builder: (context, state) =>
+                            const ForgotPasswordView()),
+                    GoRoute(
+                        name: AppViews.reset,
+                        path: _Paths.reset,
+                        builder: (context, state) => const ResetPasswordView())
                   ],
                   builder: (context, state) => const LoginView()),
               GoRoute(
                   name: AppViews.signUp,
                   path: _Paths.signUp,
+                  routes: [
+                    GoRoute(
+                        name: AppViews.accountSetup,
+                        path: _Paths.accountSetup,
+                        builder: (context, state) => const AccountSetupView())
+                  ],
                   builder: (context, state) => const SignUpView()),
             ],
             builder: (context, state) => const AuthView())
@@ -45,6 +56,8 @@ abstract class AppViews {
   static const login = 'login';
   static const signUp = 'signUp';
   static const forgotPassword = 'forgotPassword';
+  static const reset = 'reset';
+  static const accountSetup = 'accountSetup';
 }
 
 abstract class _Paths {
@@ -56,4 +69,6 @@ abstract class _Paths {
   static const login = AppViews.login;
   static const signUp = AppViews.signUp;
   static const forgotPassword = AppViews.forgotPassword;
+  static const reset = AppViews.reset;
+  static const accountSetup = AppViews.accountSetup;
 }

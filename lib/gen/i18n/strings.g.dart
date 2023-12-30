@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 11
+/// Strings: 26
 ///
-/// Built on 2023-12-30 at 14:30 UTC
+/// Built on 2023-12-30 at 17:59 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -148,6 +148,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	late final _StringsAuthEn auth = _StringsAuthEn._(_root);
+	late final _StringsOnboardingEn onboarding = _StringsOnboardingEn._(_root);
 	late final _StringsCommonEn common = _StringsCommonEn._(_root);
 }
 
@@ -163,9 +164,10 @@ class _StringsAuthEn {
 	String get password => 'password';
 	String get name => 'Full name';
 	String get email => 'Email';
+	String get nickname => 'Nickname';
 	String get repeat => 'Repeat ${_root.auth.password}';
-	String get forgot => 'Forgot password';
-	String get reset => 'Reset password';
+	String forgot({required Object v}) => 'Forgot ${v}';
+	String reset({required Object v}) => 'Reset ${v}';
 	TextSpan go_login({required InlineSpanBuilder tapHere}) => TextSpan(children: [
 		const TextSpan(text: 'Already have an account? '),
 		tapHere('${_root.auth.login}'),
@@ -174,6 +176,29 @@ class _StringsAuthEn {
 		const TextSpan(text: 'By registering, you accept the \n'),
 		tapHere('Terms and Conditions'),
 	]);
+	late final _StringsAuthSetupEn setup = _StringsAuthSetupEn._(_root);
+	late final _StringsAuthExampleEn example = _StringsAuthExampleEn._(_root);
+}
+
+// Path: onboarding
+class _StringsOnboardingEn {
+	_StringsOnboardingEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	Map<String, String> get first_view => {
+		'title': 'Share Your Recipes',
+		'description': 'Get feedback on the recipe',
+	};
+	Map<String, String> get second_view => {
+		'title': 'Learn To Cook',
+		'description': 'Find out the recipes of experienced chefs',
+	};
+	Map<String, String> get third_view => {
+		'title': 'Become a Master Chef',
+		'description': 'Cook, experiment, share',
+	};
 }
 
 // Path: common
@@ -184,6 +209,32 @@ class _StringsCommonEn {
 
 	// Translations
 	String get app_name => 'shibringo';
+	String get next => 'Next';
+	String get skip => 'Skip';
+}
+
+// Path: auth.setup
+class _StringsAuthSetupEn {
+	_StringsAuthSetupEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Account \nSetup';
+	String get upload => 'Upload your profile image';
+	String get hint => 'No more than 2 MB';
+}
+
+// Path: auth.example
+class _StringsAuthExampleEn {
+	_StringsAuthExampleEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get name => 'Ivan Ivanov';
+	String get email => 'ivan@example.com';
+	String get password => 'password';
 }
 
 /// Flat map(s) containing all translations.
@@ -197,9 +248,10 @@ extension on Translations {
 			case 'auth.password': return 'password';
 			case 'auth.name': return 'Full name';
 			case 'auth.email': return 'Email';
+			case 'auth.nickname': return 'Nickname';
 			case 'auth.repeat': return 'Repeat ${_root.auth.password}';
-			case 'auth.forgot': return 'Forgot password';
-			case 'auth.reset': return 'Reset password';
+			case 'auth.forgot': return ({required Object v}) => 'Forgot ${v}';
+			case 'auth.reset': return ({required Object v}) => 'Reset ${v}';
 			case 'auth.go_login': return ({required InlineSpanBuilder tapHere}) => TextSpan(children: [
 				const TextSpan(text: 'Already have an account? '),
 				tapHere('${_root.auth.login}'),
@@ -208,7 +260,21 @@ extension on Translations {
 				const TextSpan(text: 'By registering, you accept the \n'),
 				tapHere('Terms and Conditions'),
 			]);
+			case 'auth.setup.title': return 'Account \nSetup';
+			case 'auth.setup.upload': return 'Upload your profile image';
+			case 'auth.setup.hint': return 'No more than 2 MB';
+			case 'auth.example.name': return 'Ivan Ivanov';
+			case 'auth.example.email': return 'ivan@example.com';
+			case 'auth.example.password': return 'password';
+			case 'onboarding.first_view.title': return 'Share Your Recipes';
+			case 'onboarding.first_view.description': return 'Get feedback on the recipe';
+			case 'onboarding.second_view.title': return 'Learn To Cook';
+			case 'onboarding.second_view.description': return 'Find out the recipes of experienced chefs';
+			case 'onboarding.third_view.title': return 'Become a Master Chef';
+			case 'onboarding.third_view.description': return 'Cook, experiment, share';
 			case 'common.app_name': return 'shibringo';
+			case 'common.next': return 'Next';
+			case 'common.skip': return 'Skip';
 			default: return null;
 		}
 	}

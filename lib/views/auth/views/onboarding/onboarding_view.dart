@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shibringo/domain/di/di.dart';
 import 'package:shibringo/domain/router.dart';
+import 'package:shibringo/gen/i18n/strings.g.dart';
 import 'package:shibringo/views/auth/providers/auth_store.dart';
 
 import '../../../../config/config.dart';
@@ -38,21 +39,18 @@ class _OnboardingViewState extends State<OnboardingView> {
       _PageData(
           url:
               'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D',
-          title: 'Share Your Recipes',
-          description:
-              'Солнце взошло, окрасив небо в яркие оттенки розового и оранжевого. Легкий ветерок приятно шевелит волосы, создавая ощущение свободы и спокойствия.'),
+          title: t.onboarding.first_view['title']!,
+          description: t.onboarding.first_view['description']!),
       _PageData(
           url:
-              'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D',
-          title: 'Share Your Recipes',
-          description:
-              'Солнце взошло, окрасив небо в яркие оттенки розового и оранжевого. Легкий ветерок приятно шевелит волосы, создавая ощущение свободы и спокойствия.'),
+              'https://slavapozdnyakov.ru/sites/default/files/photo/vegetable_photographer_foodstylist_slava_pozdnyakov.jpg',
+          title: t.onboarding.second_view['title']!,
+          description: t.onboarding.second_view['description']!),
       _PageData(
           url:
-              'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D',
-          title: 'Share Your Recipes',
-          description:
-              'Солнце взошло, окрасив небо в яркие оттенки розового и оранжевого. Легкий ветерок приятно шевелит волосы, создавая ощущение свободы и спокойствия.')
+              'https://gagaru.club/uploads/posts/2023-06/1686231372_gagaru-club-p-blyuda-sverkhu-vkontakte-37.jpg',
+          title: t.onboarding.third_view['title']!,
+          description: t.onboarding.third_view['description']!)
     ];
     super.initState();
   }
@@ -76,7 +74,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   const EdgeInsets.only(right: AppConstants.kDefaultPadding),
               child: FilledButton(
                   onPressed: () => router.goNamed(AppViews.auth),
-                  child: Text('skip')),
+                  child: Text(t.common.skip)),
             )
           ],
         ),
