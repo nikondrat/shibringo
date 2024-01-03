@@ -7,6 +7,7 @@ final GoRouter router = GoRouter(routes: [
   GoRoute(
       name: AppViews.home,
       path: _Paths.home,
+      routes: [],
       builder: (context, state) => const HomeView()),
   GoRoute(
       name: AppViews.onboarding,
@@ -49,6 +50,8 @@ final GoRouter router = GoRouter(routes: [
 
 abstract class AppViews {
   static const home = 'home';
+  static const search = 'search';
+  static const user = 'user';
 
   // auth
   static const onboarding = 'onboarding';

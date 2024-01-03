@@ -38,6 +38,7 @@ dependencies:
   auto_size_text: ^3.0.0
   extended_image: ^8.2.0
   reactive_forms: ^16.1.1
+  delightful_toast: ^1.1.0
   fluid_bottom_nav_bar: ^1.4.0
   smooth_page_indicator: ^1.1.0
 
@@ -73,6 +74,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  # packages
+  user_repository:
+    path: packages/user_repository/
 
 
 

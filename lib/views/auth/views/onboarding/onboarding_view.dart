@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shibringo/domain/di/di.dart';
 import 'package:shibringo/domain/router.dart';
 import 'package:shibringo/gen/i18n/strings.g.dart';
-import 'package:shibringo/views/auth/providers/auth_store.dart';
 
 import '../../../../config/config.dart';
+import '../../stores/stores.dart';
 import '../../widgets/widgets.dart';
 import 'widgets/widgets.dart';
 

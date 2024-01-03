@@ -2,15 +2,46 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:shibringo/config/config.dart';
 import 'package:shibringo/config/constants.dart';
+import 'package:shibringo/domain/di/di.dart';
 import 'package:shibringo/domain/router.dart';
+import 'package:shibringo/domain/utils/toast.dart';
 import 'package:shibringo/domain/utils/utils.dart';
 import 'package:shibringo/gen/i18n/strings.g.dart';
 import 'package:shibringo/views/auth/widgets/widgets.dart';
 import 'package:unicons/unicons.dart';
+import 'package:user_repository/models/models.dart';
+import 'package:user_repository/repository/auth_repository.dart';
+
+import '../stores/stores.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
+
+  Future signUp(BuildContext context) async {
+    final AuthRepository authRepository = DI.i.get();
+    final SignUpStore store = DI.i.get();
+
+    if (!store.hasErrors) {
+      authRepository.signUp(
+        store.email!,
+        store.password!,
+        data: {'full_name': store.name},
+        onDone: () => router.goNamed(AppViews.accountSetup),
+        onError: (exception) {
+          switch (exception) {
+            case AuthStateException.wrongData:
+              ToastUtil.showToast(context, 'Wrong', ToastType.error);
+            case AuthStateException.tryLater:
+              ToastUtil.showToast(context, 'TRY LATER', ToastType.info);
+            default:
+              ToastUtil.showToast(context, t.errors.unknown, ToastType.error);
+          }
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +83,7 @@ class SignUpView extends StatelessWidget {
               Row(children: [
                 Expanded(
                     child: ElevatedButton(
-                        onPressed: () => context.goNamed(AppViews.accountSetup),
+                        onPressed: () => signUp(context),
                         child: Text(t.auth.register)))
               ])
             ])));
@@ -68,6 +99,8 @@ class _Inputs extends StatefulWidget {
 
 class __InputsState extends State<_Inputs> {
   late final FormGroup formGroup;
+
+  final SignUpStore store = DI.i.get();
 
   bool isShowPassword = false;
 
@@ -97,11 +130,13 @@ class __InputsState extends State<_Inputs> {
           ReactiveTextField(
               formControlName: 'name',
               textInputAction: TextInputAction.next,
+              onChanged: (control) => store.setName(control.value as String?),
               decoration: InputDecoration(
                   labelText: t.auth.name, hintText: t.auth.example.name)),
           AppConstants.kDefaultBodyPadding,
           ReactiveTextField(
               formControlName: 'email',
+              onChanged: (control) => store.setEmail(control.value as String?),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -109,8 +144,10 @@ class __InputsState extends State<_Inputs> {
           AppConstants.kDefaultBodyPadding,
           ReactiveTextField(
               formControlName: 'password',
+              onChanged: (control) =>
+                  store.setPassword(control.value as String?),
               obscureText: !isShowPassword,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -123,7 +160,7 @@ class __InputsState extends State<_Inputs> {
                           icon: isShowPassword
                               ? const Icon(UniconsLine.eye_slash)
                               : const Icon(UniconsLine.eye))),
-                  labelText: StringUtil.capitalize(t.auth.password))),
+                  labelText: StringUtil.capitalize(t.auth.password)))
         ]));
   }
 }

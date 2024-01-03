@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shibringo/config/palette.dart';
 import 'package:unicons/unicons.dart';
 
+import 'views.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -28,25 +30,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        controller: controller,
-        children: [
-          Scaffold(
-            appBar: AppBar(
-              title: Text('first'),
-            ),
-          ),
-          Scaffold(
-            appBar: AppBar(
-              title: Text('second'),
-            ),
-          ),
-          Scaffold(
-            appBar: AppBar(
-              title: Text('third'),
-            ),
-          )
-        ],
-      ),
+          controller: controller,
+          children: [HomeView(), SearchView(), UserView()]),
       bottomNavigationBar: FluidNavBar(
           animationFactor: .8,
           onChange: (selectedIndex) => controller.animateToPage(selectedIndex,
@@ -56,8 +41,8 @@ class _HomeViewState extends State<HomeView> {
               barBackgroundColor: Theme.of(context).colorScheme.secondary),
           icons: [
             FluidNavBarIcon(icon: UniconsLine.home_alt),
-            FluidNavBarIcon(icon: UniconsLine.home_alt),
-            FluidNavBarIcon(icon: UniconsLine.home_alt),
+            FluidNavBarIcon(icon: UniconsLine.search),
+            FluidNavBarIcon(icon: UniconsLine.user),
           ]),
     );
   }

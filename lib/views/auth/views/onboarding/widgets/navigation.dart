@@ -5,7 +5,7 @@ import 'package:unicons/unicons.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../domain/di/di.dart';
-import '../../../providers/auth_store.dart';
+import '../../../stores/stores.dart';
 
 class NavigationWidget extends StatelessWidget {
   final PageController controller;

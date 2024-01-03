@@ -22,6 +22,12 @@ class AppTheme {
           headlineSmall: TextStyle(color: Colors.white),
           headlineMedium: TextStyle(color: Colors.white),
           titleMedium: TextStyle(color: Colors.white)),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: AppColors.darkSecondaryColor,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+            borderRadius: AppConstants.kDefaultBorderAllRadius),
+      ),
       elevatedButtonTheme: const ElevatedButtonThemeData(
           style: ButtonStyle(
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
@@ -48,8 +54,14 @@ class AppTheme {
           floatingLabelBehavior: FloatingLabelBehavior.always),
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
-              shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: AppConstants.kDefaultBorderAllRadius / 2)),
-              backgroundColor: const MaterialStatePropertyAll(AppColors.darkSecondaryColor),
-              foregroundColor: const MaterialStatePropertyAll(AppColors.darkPrimaryColor))),
-      colorScheme: ColorScheme.fromSwatch(primarySwatch: getMaterialColor(AppColors.darkPrimaryColor), accentColor: getMaterialColor(AppColors.darkSecondaryColor), backgroundColor: getMaterialColor(AppColors.darkBackgroundColor)));
+              shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                  borderRadius: AppConstants.kDefaultBorderAllRadius / 2)),
+              backgroundColor:
+                  const MaterialStatePropertyAll(AppColors.darkSecondaryColor),
+              foregroundColor:
+                  const MaterialStatePropertyAll(AppColors.darkPrimaryColor))),
+      colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: getMaterialColor(AppColors.darkPrimaryColor),
+          accentColor: getMaterialColor(AppColors.darkSecondaryColor),
+          backgroundColor: getMaterialColor(AppColors.darkBackgroundColor)));
 }

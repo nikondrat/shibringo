@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 26
+/// Strings: 28
 ///
-/// Built on 2023-12-30 at 17:59 UTC
+/// Built on 2024-01-03 at 16:26 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -147,9 +147,33 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
+	late final _StringsCommonEn common = _StringsCommonEn._(_root);
+	late final _StringsErrorsEn errors = _StringsErrorsEn._(_root);
 	late final _StringsAuthEn auth = _StringsAuthEn._(_root);
 	late final _StringsOnboardingEn onboarding = _StringsOnboardingEn._(_root);
-	late final _StringsCommonEn common = _StringsCommonEn._(_root);
+}
+
+// Path: common
+class _StringsCommonEn {
+	_StringsCommonEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get app_name => 'shibringo';
+	String get next => 'Next';
+	String get skip => 'Skip';
+}
+
+// Path: errors
+class _StringsErrorsEn {
+	_StringsErrorsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get exists => 'An account with this email already exists';
+	String get unknown => 'Unknown error';
 }
 
 // Path: auth
@@ -201,18 +225,6 @@ class _StringsOnboardingEn {
 	};
 }
 
-// Path: common
-class _StringsCommonEn {
-	_StringsCommonEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get app_name => 'shibringo';
-	String get next => 'Next';
-	String get skip => 'Skip';
-}
-
 // Path: auth.setup
 class _StringsAuthSetupEn {
 	_StringsAuthSetupEn._(this._root);
@@ -243,6 +255,11 @@ class _StringsAuthExampleEn {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'common.app_name': return 'shibringo';
+			case 'common.next': return 'Next';
+			case 'common.skip': return 'Skip';
+			case 'errors.exists': return 'An account with this email already exists';
+			case 'errors.unknown': return 'Unknown error';
 			case 'auth.register': return 'Register';
 			case 'auth.login': return 'Login';
 			case 'auth.password': return 'password';
@@ -272,9 +289,6 @@ extension on Translations {
 			case 'onboarding.second_view.description': return 'Find out the recipes of experienced chefs';
 			case 'onboarding.third_view.title': return 'Become a Master Chef';
 			case 'onboarding.third_view.description': return 'Cook, experiment, share';
-			case 'common.app_name': return 'shibringo';
-			case 'common.next': return 'Next';
-			case 'common.skip': return 'Skip';
 			default: return null;
 		}
 	}

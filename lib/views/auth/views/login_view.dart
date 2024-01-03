@@ -3,14 +3,38 @@ import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:shibringo/views/auth/widgets/widgets.dart';
 import 'package:unicons/unicons.dart';
+import 'package:user_repository/repository.dart';
 
 import '../../../config/config.dart';
+import '../../../domain/di/di.dart';
 import '../../../domain/router.dart';
+import '../../../domain/utils/toast.dart';
 import '../../../domain/utils/utils.dart';
 import '../../../gen/i18n/strings.g.dart';
+import '../stores/stores.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
+
+  Future login(BuildContext context) async {
+    final AuthRepository authRepository = DI.i.get();
+    final LoginStore store = DI.i.get();
+
+    if (!store.hasErrors) {
+      authRepository.signIn(store.email!, store.password!,
+          onDone: () => router.goNamed(AppViews.home),
+          onError: (exception) {
+            switch (exception) {
+              case AuthStateException.wrongData:
+                ToastUtil.showToast(context, 'Wrong', ToastType.error);
+              case AuthStateException.tryLater:
+                ToastUtil.showToast(context, 'TRY LATER', ToastType.info);
+              default:
+                ToastUtil.showToast(context, t.errors.unknown, ToastType.error);
+            }
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +76,7 @@ class LoginView extends StatelessWidget {
               Row(children: [
                 Expanded(
                     child: ElevatedButton(
-                        onPressed: () => context.goNamed(AppViews.home),
+                        onPressed: () => login(context),
                         child: Text(t.auth.login)))
               ]),
               AppConstants.kDefaultBodySmallPadding,
@@ -70,6 +94,8 @@ class _Inputs extends StatefulWidget {
 
 class __InputsState extends State<_Inputs> {
   late final FormGroup formGroup;
+
+  final LoginStore store = DI.i.get();
 
   bool isShowPassword = false;
 
@@ -97,6 +123,7 @@ class __InputsState extends State<_Inputs> {
           AppConstants.kDefaultBodyPadding,
           ReactiveTextField(
               formControlName: 'email',
+              onChanged: (control) => store.setEmail(control.value as String?),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -105,6 +132,8 @@ class __InputsState extends State<_Inputs> {
           ReactiveTextField(
               formControlName: 'password',
               obscureText: !isShowPassword,
+              onChanged: (control) =>
+                  store.setPassword(control.value as String?),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(

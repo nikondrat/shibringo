@@ -23,8 +23,4 @@ abstract class _AuthStore with Store {
           duration: AppConstants.kDefaultDuration, curve: Curves.easeInOut);
     }
   }
-
-  void dispose() {
-    dispose();
-  }
 }
