@@ -9,14 +9,14 @@ import '../../../domain/router.dart';
 import '../../../domain/utils/utils.dart';
 import '../../../gen/i18n/strings.g.dart';
 
-class ResetPasswordView extends StatefulWidget {
-  const ResetPasswordView({super.key});
+class ChangePasswordView extends StatefulWidget {
+  const ChangePasswordView({super.key});
 
   @override
-  State<ResetPasswordView> createState() => _ResetPasswordViewState();
+  State<ChangePasswordView> createState() => _ChangePasswordViewState();
 }
 
-class _ResetPasswordViewState extends State<ResetPasswordView> {
+class _ChangePasswordViewState extends State<ChangePasswordView> {
   late final FormGroup formGroup;
 
   bool isShowPassword = false;

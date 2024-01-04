@@ -19,7 +19,7 @@ import '../stores/stores.dart';
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
 
-  Future signUp(BuildContext context) async {
+  static Future signUp(BuildContext context) async {
     final AuthRepository authRepository = DI.i.get();
     final SignUpStore store = DI.i.get();
 
@@ -31,9 +31,9 @@ class SignUpView extends StatelessWidget {
         onDone: () => router.goNamed(AppViews.accountSetup),
         onError: (exception) {
           switch (exception) {
-            case AuthStateException.wrongData:
+            case ConnectionStateException.wrongData:
               ToastUtil.showToast(context, 'Wrong', ToastType.error);
-            case AuthStateException.tryLater:
+            case ConnectionStateException.tryLater:
               ToastUtil.showToast(context, 'TRY LATER', ToastType.info);
             default:
               ToastUtil.showToast(context, t.errors.unknown, ToastType.error);

@@ -1,0 +1,4 @@
+enum PickerStateException {
+  storageError,
+  unknown,
+}

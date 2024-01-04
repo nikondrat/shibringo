@@ -7,11 +7,23 @@ final GoRouter router = GoRouter(routes: [
   GoRoute(
       name: AppViews.home,
       path: _Paths.home,
-      routes: [],
       builder: (context, state) => const HomeView()),
   GoRoute(
       name: AppViews.onboarding,
       path: _Paths.onboarding,
+      // redirect: (context, state) async {
+      //   final UserRepository userRepository = DI.i.get();
+
+      //   if (!context.mounted) return null;
+
+      //   final bool isLogged = await userRepository.isLogged();
+
+      //   if (isLogged) {
+      //     return _Paths.home;
+      //   } else {
+      //     return null;
+      //   }
+      // },
       routes: [
         GoRoute(
             name: AppViews.auth,
@@ -29,7 +41,7 @@ final GoRouter router = GoRouter(routes: [
                     GoRoute(
                         name: AppViews.reset,
                         path: _Paths.reset,
-                        builder: (context, state) => const ResetPasswordView())
+                        builder: (context, state) => const ChangePasswordView())
                   ],
                   builder: (context, state) => const LoginView()),
               GoRoute(

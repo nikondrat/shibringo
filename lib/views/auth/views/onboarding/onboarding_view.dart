@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shibringo/domain/di/di.dart';
 import 'package:shibringo/domain/router.dart';
 import 'package:shibringo/gen/i18n/strings.g.dart';
+import 'package:user_repository/repository.dart';
 
 import '../../../../config/config.dart';
 import '../../stores/stores.dart';
@@ -27,6 +28,7 @@ class OnboardingView extends StatefulWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
+  final UserRepository userRepository = DI.i.get();
   final AuthStore store = DI.i.get();
 
   late final PageController controller;
@@ -34,6 +36,8 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   void initState() {
+    super.initState();
+
     controller = PageController();
     data = [
       _PageData(
@@ -52,7 +56,6 @@ class _OnboardingViewState extends State<OnboardingView> {
           title: t.onboarding.third_view['title']!,
           description: t.onboarding.third_view['description']!)
     ];
-    super.initState();
   }
 
   @override

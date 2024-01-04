@@ -9,22 +9,22 @@ class SupabaseAuth extends AuthRepository {
   @override
   Future signIn(String email, String password,
       {required Function onDone,
-      required Function(AuthStateException exception) onError}) async {
+      required Function(ConnectionStateException exception) onError}) async {
     try {
       return await _supabase
           .signInWithPassword(email: email, password: password)
           .then((value) {
-        if (value.session != null) return onDone();
+        if (value.user != null) return onDone();
       });
     } on AuthException catch (e) {
       if (e.statusCode != null) {
         switch (int.parse(e.statusCode!)) {
           case 429:
-            return onError(AuthStateException.tryLater);
+            return onError(ConnectionStateException.tryLater);
         }
       }
 
-      return onError(AuthStateException.unknown);
+      return onError(ConnectionStateException.unknown);
     }
   }
 
@@ -37,7 +37,7 @@ class SupabaseAuth extends AuthRepository {
   Future signUp(String email, String password,
       {Map<String, dynamic>? data,
       required Function onDone,
-      required Function(AuthStateException exception) onError}) async {
+      required Function(ConnectionStateException exception) onError}) async {
     try {
       return await _supabase
           .signUp(email: email, password: password, data: data)
@@ -48,11 +48,28 @@ class SupabaseAuth extends AuthRepository {
       if (e.statusCode != null) {
         switch (int.parse(e.statusCode!)) {
           case 429:
-            return onError(AuthStateException.tryLater);
+            return onError(ConnectionStateException.tryLater);
         }
       }
 
-      return onError(AuthStateException.unknown);
+      return onError(ConnectionStateException.unknown);
+    }
+  }
+
+  @override
+  Future resetPassword(String email,
+      {required Function(ConnectionStateException exception) onError}) async {
+    try {
+      _supabase.resetPasswordForEmail(email);
+    } on AuthException catch (e) {
+      if (e.statusCode != null) {
+        switch (int.parse(e.statusCode!)) {
+          case 429:
+            return onError(ConnectionStateException.tryLater);
+        }
+      }
+
+      return onError(ConnectionStateException.unknown);
     }
   }
 }

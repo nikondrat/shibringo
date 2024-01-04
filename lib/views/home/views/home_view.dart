@@ -31,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       body: PageView(
           controller: controller,
-          children: [HomeView(), SearchView(), UserView()]),
+          children: [Scaffold(), SearchView(), UserView()]),
       bottomNavigationBar: FluidNavBar(
           animationFactor: .8,
           onChange: (selectedIndex) => controller.animateToPage(selectedIndex,

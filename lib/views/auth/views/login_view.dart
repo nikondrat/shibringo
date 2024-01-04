@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:shibringo/views/auth/widgets/widgets.dart';
 import 'package:unicons/unicons.dart';
 import 'package:user_repository/repository.dart';
 
@@ -12,22 +11,23 @@ import '../../../domain/utils/toast.dart';
 import '../../../domain/utils/utils.dart';
 import '../../../gen/i18n/strings.g.dart';
 import '../stores/stores.dart';
+import '../widgets/widgets.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
-  Future login(BuildContext context) async {
+  static Future login(BuildContext context) async {
     final AuthRepository authRepository = DI.i.get();
     final LoginStore store = DI.i.get();
 
     if (!store.hasErrors) {
       authRepository.signIn(store.email!, store.password!,
-          onDone: () => router.goNamed(AppViews.home),
+          onDone: () => context.goNamed(AppViews.home),
           onError: (exception) {
             switch (exception) {
-              case AuthStateException.wrongData:
+              case ConnectionStateException.wrongData:
                 ToastUtil.showToast(context, 'Wrong', ToastType.error);
-              case AuthStateException.tryLater:
+              case ConnectionStateException.tryLater:
                 ToastUtil.showToast(context, 'TRY LATER', ToastType.info);
               default:
                 ToastUtil.showToast(context, t.errors.unknown, ToastType.error);
