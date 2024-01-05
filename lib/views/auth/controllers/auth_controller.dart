@@ -4,11 +4,11 @@ import 'package:shibringo/domain/router.dart';
 
 import '../../../config/config.dart';
 
-part 'auth_store.g.dart';
+part 'auth_controller.g.dart';
 
-class AuthStore extends _AuthStore with _$AuthStore {}
+class AuthController extends _AuthController with _$AuthController {}
 
-abstract class _AuthStore with Store {
+abstract class _AuthController with Store {
   int index = 0;
 
   void onPageChanged(int value) {

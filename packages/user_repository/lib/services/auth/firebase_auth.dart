@@ -1,10 +1,12 @@
-import 'package:user_repository/models/connection_state.dart';
+import 'package:user_repository/models/connection_state_exception.dart';
+import 'package:user_repository/models/models.dart';
 import 'package:user_repository/repository/auth_repository.dart';
 
 class FirebaseAuth extends AuthRepository {
   @override
   Future resetPassword(String email,
-      {required Function(ConnectionStateException exception) onError}) {
+      {required Function onDone,
+      required Function(ConnectionStateException exception) onError}) {
     // TODO: implement resetPassword
     throw UnimplementedError();
   }
@@ -29,6 +31,14 @@ class FirebaseAuth extends AuthRepository {
       required Function onDone,
       required Function(ConnectionStateException exception) onError}) {
     // TODO: implement signUp
+    throw UnimplementedError();
+  }
+
+  @override
+  Future changePassword(String password,
+      {required Function onDone,
+      required Function(ConnectionStateException exception) onError}) {
+    // TODO: implement changePassword
     throw UnimplementedError();
   }
 }

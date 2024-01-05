@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 28
+/// Strings: 31
 ///
-/// Built on 2024-01-03 at 16:26 UTC
+/// Built on 2024-01-05 at 14:39 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -183,6 +183,7 @@ class _StringsAuthEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get account => 'Account';
 	String get register => 'Register';
 	String get login => 'Login';
 	String get password => 'password';
@@ -192,6 +193,7 @@ class _StringsAuthEn {
 	String get repeat => 'Repeat ${_root.auth.password}';
 	String forgot({required Object v}) => 'Forgot ${v}';
 	String reset({required Object v}) => 'Reset ${v}';
+	String get create => 'Create an ${_root.auth.account}';
 	TextSpan go_login({required InlineSpanBuilder tapHere}) => TextSpan(children: [
 		const TextSpan(text: 'Already have an account? '),
 		tapHere('${_root.auth.login}'),
@@ -200,6 +202,7 @@ class _StringsAuthEn {
 		const TextSpan(text: 'By registering, you accept the \n'),
 		tapHere('Terms and Conditions'),
 	]);
+	String get recovery_password_hint => 'A link for password recovery has been sent to your email';
 	late final _StringsAuthSetupEn setup = _StringsAuthSetupEn._(_root);
 	late final _StringsAuthExampleEn example = _StringsAuthExampleEn._(_root);
 }
@@ -232,7 +235,7 @@ class _StringsAuthSetupEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get title => 'Account \nSetup';
+	String get title => '${_root.auth.account} \nSetup';
 	String get upload => 'Upload your profile image';
 	String get hint => 'No more than 2 MB';
 }
@@ -260,6 +263,7 @@ extension on Translations {
 			case 'common.skip': return 'Skip';
 			case 'errors.exists': return 'An account with this email already exists';
 			case 'errors.unknown': return 'Unknown error';
+			case 'auth.account': return 'Account';
 			case 'auth.register': return 'Register';
 			case 'auth.login': return 'Login';
 			case 'auth.password': return 'password';
@@ -269,6 +273,7 @@ extension on Translations {
 			case 'auth.repeat': return 'Repeat ${_root.auth.password}';
 			case 'auth.forgot': return ({required Object v}) => 'Forgot ${v}';
 			case 'auth.reset': return ({required Object v}) => 'Reset ${v}';
+			case 'auth.create': return 'Create an ${_root.auth.account}';
 			case 'auth.go_login': return ({required InlineSpanBuilder tapHere}) => TextSpan(children: [
 				const TextSpan(text: 'Already have an account? '),
 				tapHere('${_root.auth.login}'),
@@ -277,7 +282,8 @@ extension on Translations {
 				const TextSpan(text: 'By registering, you accept the \n'),
 				tapHere('Terms and Conditions'),
 			]);
-			case 'auth.setup.title': return 'Account \nSetup';
+			case 'auth.recovery_password_hint': return 'A link for password recovery has been sent to your email';
+			case 'auth.setup.title': return '${_root.auth.account} \nSetup';
 			case 'auth.setup.upload': return 'Upload your profile image';
 			case 'auth.setup.hint': return 'No more than 2 MB';
 			case 'auth.example.name': return 'Ivan Ivanov';

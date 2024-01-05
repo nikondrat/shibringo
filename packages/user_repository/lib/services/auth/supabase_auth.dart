@@ -11,20 +11,20 @@ class SupabaseAuth extends AuthRepository {
       {required Function onDone,
       required Function(ConnectionStateException exception) onError}) async {
     try {
-      return await _supabase
+      await _supabase
           .signInWithPassword(email: email, password: password)
           .then((value) {
-        if (value.user != null) return onDone();
+        if (value.user != null) onDone();
       });
     } on AuthException catch (e) {
       if (e.statusCode != null) {
         switch (int.parse(e.statusCode!)) {
           case 429:
-            return onError(ConnectionStateException.tryLater);
+            onError(ConnectionStateException.tryLater);
         }
       }
 
-      return onError(ConnectionStateException.unknown);
+      onError(ConnectionStateException.unknown);
     }
   }
 
@@ -39,37 +39,58 @@ class SupabaseAuth extends AuthRepository {
       required Function onDone,
       required Function(ConnectionStateException exception) onError}) async {
     try {
-      return await _supabase
+      await _supabase
           .signUp(email: email, password: password, data: data)
           .then((value) {
-        if (value.user != null) return onDone();
+        if (value.user != null) {
+          onDone();
+        }
       });
     } on AuthException catch (e) {
       if (e.statusCode != null) {
         switch (int.parse(e.statusCode!)) {
           case 429:
-            return onError(ConnectionStateException.tryLater);
+            onError(ConnectionStateException.tryLater);
         }
       }
 
-      return onError(ConnectionStateException.unknown);
+      onError(ConnectionStateException.unknown);
     }
   }
 
   @override
   Future resetPassword(String email,
-      {required Function(ConnectionStateException exception) onError}) async {
+      {required Function onDone,
+      required Function(ConnectionStateException exception) onError}) async {
     try {
-      _supabase.resetPasswordForEmail(email);
+      _supabase.resetPasswordForEmail(email).then((value) => onDone());
     } on AuthException catch (e) {
       if (e.statusCode != null) {
         switch (int.parse(e.statusCode!)) {
           case 429:
-            return onError(ConnectionStateException.tryLater);
+            onError(ConnectionStateException.tryLater);
         }
       }
 
-      return onError(ConnectionStateException.unknown);
+      onError(ConnectionStateException.unknown);
+    }
+  }
+
+  @override
+  Future changePassword(String password,
+      {required Function onDone,
+      required Function(ConnectionStateException exception) onError}) async {
+    try {
+      _supabase.updateUser(UserAttributes(password: password));
+    } on AuthException catch (e) {
+      if (e.statusCode != null) {
+        switch (int.parse(e.statusCode!)) {
+          case 429:
+            onError(ConnectionStateException.tryLater);
+        }
+      }
+
+      onError(ConnectionStateException.unknown);
     }
   }
 }

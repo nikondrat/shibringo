@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:shibringo/views/auth/controllers/controllers.dart';
 import 'package:shibringo/views/auth/widgets/widgets.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../config/config.dart';
+import '../../../domain/di/di.dart';
 import '../../../domain/router.dart';
 import '../../../domain/utils/utils.dart';
 import '../../../gen/i18n/strings.g.dart';
@@ -17,26 +20,17 @@ class ChangePasswordView extends StatefulWidget {
 }
 
 class _ChangePasswordViewState extends State<ChangePasswordView> {
-  late final FormGroup formGroup;
-
-  bool isShowPassword = false;
-  bool isShowRepeatPassword = false;
+  final ChangePasswordController controller = DI.i.get();
 
   @override
   void initState() {
-    formGroup = FormGroup({
-      'password': FormControl(
-          validators: [Validators.required, Validators.minLength(8)]),
-      'repeat': FormControl(validators: [Validators.required])
-    }, validators: [
-      const MustMatchValidator('password', 'repeat', true)
-    ]);
+    controller.initFormGroup();
     super.initState();
   }
 
   @override
   void dispose() {
-    formGroup.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -49,56 +43,45 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
             icon: const Icon(UniconsLine.arrow_right),
             onPressed: () => context.goNamed(AppViews.home)),
         body: ReactiveForm(
-            formGroup: formGroup,
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                    AppConstants.kDefaultPadding,
-                    AppConstants.kDefaultPadding * 10,
-                    AppConstants.kDefaultPadding,
-                    AppConstants.kDefaultPadding),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TitleWidget(
-                          text: t.auth.reset(
-                              v: '\n${StringUtil.capitalize(t.auth.password)}')),
-                      AppConstants.kDefaultBodyPadding,
-                      DescriptionWidget(text: 'noidfosfksd'),
-                      AppConstants.kDefaultBodyPadding,
-                      ReactiveTextField(
+            formGroup: controller.formGroup!,
+            child: BodyWidget(
+                title: t.auth
+                    .reset(v: '\n${StringUtil.capitalize(t.auth.password)}'),
+                widgets: [
+                  Observer(
+                      builder: (_) => ReactiveTextField(
                           formControlName: 'password',
-                          obscureText: !isShowPassword,
+                          obscureText: !controller.isShowPassword,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                               suffixIcon: Padding(
                                   padding: AppConstants.kDefaultActionPadding,
                                   child: IconButton(
-                                      onPressed: () => setState(() =>
-                                          isShowPassword = !isShowPassword),
-                                      icon: isShowPassword
+                                      onPressed: () =>
+                                          controller.togglePasswordForm(),
+                                      icon: controller.isShowPassword
                                           ? const Icon(UniconsLine.eye_slash)
                                           : const Icon(UniconsLine.eye))),
                               labelText:
-                                  StringUtil.capitalize(t.auth.password))),
-                      AppConstants.kDefaultBodyPadding,
-                      ReactiveTextField(
+                                  StringUtil.capitalize(t.auth.password)))),
+                  AppConstants.kDefaultBodyPadding,
+                  Observer(
+                      builder: (_) => ReactiveTextField(
                           formControlName: 'repeat',
-                          obscureText: !isShowRepeatPassword,
+                          obscureText: !controller.isShowRepeatPassword,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                               suffixIcon: Padding(
                                   padding: AppConstants.kDefaultActionPadding,
                                   child: IconButton(
-                                      onPressed: () => setState(() =>
-                                          isShowRepeatPassword =
-                                              !isShowRepeatPassword),
-                                      icon: isShowRepeatPassword
+                                      onPressed: () =>
+                                          controller.togglePasswordRepeatForm(),
+                                      icon: controller.isShowRepeatPassword
                                           ? const Icon(UniconsLine.eye_slash)
                                           : const Icon(UniconsLine.eye))),
-                              labelText: StringUtil.capitalize(t.auth.repeat)))
-                    ]))));
+                              labelText: StringUtil.capitalize(t.auth.repeat))))
+                ])));
   }
 }

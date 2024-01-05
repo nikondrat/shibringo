@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../views/home/home.dart';
 import '../views/auth/auth.dart';
 
-final GoRouter router = GoRouter(routes: [
+final GlobalKey<NavigatorState> navKey = GlobalKey();
+
+final GoRouter router = GoRouter(navigatorKey: navKey, routes: [
   GoRoute(
       name: AppViews.home,
       path: _Paths.home,

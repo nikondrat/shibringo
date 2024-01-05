@@ -10,7 +10,12 @@ abstract class AuthRepository {
       required Function(ConnectionStateException exception) onError});
 
   Future resetPassword(String email,
-      {required Function(ConnectionStateException exception) onError});
+      {required Function onDone,
+      required Function(ConnectionStateException exception) onError});
+
+  Future changePassword(String password,
+      {required Function onDone,
+      required Function(ConnectionStateException exception) onError});
 
   Future signOut();
 }

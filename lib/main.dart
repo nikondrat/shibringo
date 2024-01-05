@@ -10,8 +10,11 @@ void main() async {
 
   await DI.init();
 
-  const url = String.fromEnvironment('API_URL');
-  const apiKey = String.fromEnvironment('API_KEY');
+  const url = 'https://bvqolmivoxotvwkrvmro.supabase.co';
+  // String.fromEnvironment('API_URL');
+  const apiKey =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2cW9sbWl2b3hvdHZ3a3J2bXJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQyMDAzNzQsImV4cCI6MjAxOTc3NjM3NH0.HW6GWMzZaTDICctf-jBMHwkhGVHo9R4I1gasJSiCMN0';
+  // String.fromEnvironment('API_KEY');
 
   DI.i.get<UserRepository>().init(url, apiKey);
 

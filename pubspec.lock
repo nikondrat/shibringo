@@ -701,6 +701,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.0"
+  mobx_widget:
+    dependency: "direct main"
+    description:
+      name: mobx_widget
+      sha256: c77c27a63c2a9cb8ac7f4933bd0fd9a97984aea5d4797b0a528858b64fb99aa4
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.1"
   mockito:
     dependency: "direct main"
     description:

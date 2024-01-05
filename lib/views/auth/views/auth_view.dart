@@ -31,42 +31,34 @@ class AuthView extends StatelessWidget {
         extendBodyBehindAppBar: true,
         body: Stack(children: [
           const ImageWidget(url: url),
-          Padding(
-              padding: AppConstants.kDefaultPaddingWithoutTop,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
+          BodyWidget(
+              title: t.auth.create,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              widgets: [
+                Row(
                   children: [
-                    TitleWidget(text: 'Create an Account'),
-                    AppConstants.kDefaultBodyPadding,
-                    DescriptionWidget(
-                        text:
-                            'Солнце взошло, окрасив небо в яркие оттенки розового и оранжевого. Легкий ветерок приятно шевелит волосы, создавая ощущение свободы и спокойствия.'),
-                    AppConstants.kDefaultBodyPadding,
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ElevatedButton(
-                                onPressed: () =>
-                                    context.goNamed(AppViews.signUp),
-                                child: Text(t.auth.register))),
-                      ],
-                    ),
-                    AppConstants.kDefaultBodySmallPadding,
-                    const SocialButtons(),
-                    AppConstants.kDefaultBodyPadding,
-                    Center(
-                      child: Text.rich(
-                          t.auth.go_login(
-                              tapHere: (v) => TextSpan(
-                                  text: v,
-                                  style: TextStyle(color: Colors.white),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap =
-                                        () => context.goNamed(AppViews.login))),
-                          style: TextStyle(color: Colors.white70)),
-                    )
-                  ]))
+                    Expanded(
+                        child: ElevatedButton(
+                            onPressed: () => context.goNamed(AppViews.signUp),
+                            child: Text(t.auth.register))),
+                  ],
+                ),
+                AppConstants.kDefaultBodySmallPadding,
+                const SocialButtons(),
+                AppConstants.kDefaultBodyPadding,
+                Center(
+                  child: Text.rich(
+                      t.auth.go_login(
+                          tapHere: (v) => TextSpan(
+                              text: v,
+                              style: TextStyle(color: Colors.white),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap =
+                                    () => context.goNamed(AppViews.login))),
+                      style: TextStyle(color: Colors.white70)),
+                )
+              ])
         ]));
   }
 }

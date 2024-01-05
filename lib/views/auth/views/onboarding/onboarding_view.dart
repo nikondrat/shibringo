@@ -5,7 +5,7 @@ import 'package:shibringo/gen/i18n/strings.g.dart';
 import 'package:user_repository/repository.dart';
 
 import '../../../../config/config.dart';
-import '../../stores/stores.dart';
+import '../../controllers/controllers.dart';
 import '../../widgets/widgets.dart';
 import 'widgets/widgets.dart';
 
@@ -29,7 +29,7 @@ class OnboardingView extends StatefulWidget {
 
 class _OnboardingViewState extends State<OnboardingView> {
   final UserRepository userRepository = DI.i.get();
-  final AuthStore store = DI.i.get();
+  final AuthController store = DI.i.get();
 
   late final PageController controller;
   late List data;

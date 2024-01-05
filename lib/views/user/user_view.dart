@@ -2,7 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:user_repository/repository.dart';
 
-import '../../../domain/di/di.dart';
+import '../../domain/di/di.dart';
 
 class UserView extends StatefulWidget {
   const UserView({super.key});
@@ -29,17 +29,16 @@ class _UserViewState extends State<UserView> {
           FutureBuilder(
               future: future,
               builder: (context, snapshot) {
-                if (snapshot.hasData &&
-                    snapshot.connectionState == ConnectionState.done) {
-                  return Align(
-                    alignment: Alignment.center,
-                    child: CircleAvatar(
-                        radius: 80,
-                        backgroundImage: ExtendedNetworkImageProvider(
-                            snapshot.data!.avatarUrl)),
-                  );
-                }
-                return CircularProgressIndicator();
+                return Align(
+                  alignment: Alignment.center,
+                  child: snapshot.hasData &&
+                          snapshot.connectionState == ConnectionState.done
+                      ? CircleAvatar(
+                          radius: 80,
+                          backgroundImage: ExtendedNetworkImageProvider(
+                              snapshot.data!.avatarUrl))
+                      : CircularProgressIndicator(),
+                );
               })
         ],
       ),

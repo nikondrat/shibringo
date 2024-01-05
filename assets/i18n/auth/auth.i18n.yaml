@@ -1,3 +1,4 @@
+account: Account
 register: Register
 login: Login
 password: password
@@ -7,10 +8,12 @@ nickname: Nickname
 repeat: Repeat @:auth.password
 forgot: Forgot $v
 reset: Reset $v
+create: Create an @:auth.account
 go_login(rich): Already have an account? ${tapHere(@:auth.login)}
 terms_hint(rich): By registering, you accept the \n${tapHere(Terms and Conditions)}
+recovery_password_hint: A link for password recovery has been sent to your email
 setup:
-  title: Account \nSetup
+  title: '@:auth.account \nSetup'
   upload: Upload your profile image
   hint: No more than 2 MB
 example:

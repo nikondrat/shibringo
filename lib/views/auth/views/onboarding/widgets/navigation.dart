@@ -5,7 +5,7 @@ import 'package:unicons/unicons.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../domain/di/di.dart';
-import '../../../stores/stores.dart';
+import '../../../controllers/controllers.dart';
 
 class NavigationWidget extends StatelessWidget {
   final PageController controller;
@@ -13,7 +13,7 @@ class NavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthStore store = DI.i.get();
+    final AuthController store = DI.i.get();
 
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       SmoothPageIndicator(
