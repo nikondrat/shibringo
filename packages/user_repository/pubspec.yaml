@@ -10,9 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
+  # auth services
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
+
   supabase_flutter: ^2.0.2
+  
+  # other
   image_picker: ^1.0.5
+  dio: ^5.4.0
 
 
 

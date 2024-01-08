@@ -8,9 +8,13 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
-        child: ExtendedImage.network(url,
-            fit: BoxFit.cover,
-            color: Colors.black.withAlpha(80),
-            colorBlendMode: BlendMode.colorBurn));
+        child: Container(
+            foregroundDecoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.transparent, Colors.black87],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [.3, 1])),
+            child: ExtendedImage.network(url, fit: BoxFit.cover)));
   }
 }

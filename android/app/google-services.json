@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "466687791773",
+    "project_id": "shibringo-8bd93",
+    "storage_bucket": "shibringo-8bd93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466687791773:android:0330c57b01c48a19b93a74",
+        "android_client_info": {
+          "package_name": "com.example.shibringo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFdqRpOgIYxNO40zmQvCHH8hn1G6N1wIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

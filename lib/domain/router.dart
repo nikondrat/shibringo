@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shibringo/views/recipe/recipe_view.dart';
 
 import '../views/home/home.dart';
 import '../views/auth/auth.dart';
@@ -10,6 +11,12 @@ final GoRouter router = GoRouter(navigatorKey: navKey, routes: [
   GoRoute(
       name: AppViews.home,
       path: _Paths.home,
+      routes: [
+        GoRoute(
+            name: AppViews.recipe,
+            path: _Paths.recipe,
+            builder: (context, state) => const RecipeView())
+      ],
       builder: (context, state) => const HomeView()),
   GoRoute(
       name: AppViews.onboarding,
@@ -67,6 +74,7 @@ abstract class AppViews {
   static const home = 'home';
   static const search = 'search';
   static const user = 'user';
+  static const recipe = 'recipe';
 
   // auth
   static const onboarding = 'onboarding';
@@ -80,6 +88,7 @@ abstract class AppViews {
 
 abstract class _Paths {
   static const home = '/${AppViews.home}';
+  static const recipe = AppViews.recipe;
 
   // auth
   static const onboarding = '/';

@@ -1,7 +1,7 @@
 import 'package:user_repository/models/models.dart';
 
 abstract class UserRepository {
-  Future<void> init(String baseUrl, String apiKey);
+  Future<void> init(Map<String, dynamic> data);
 
   Future<bool> isLogged();
 

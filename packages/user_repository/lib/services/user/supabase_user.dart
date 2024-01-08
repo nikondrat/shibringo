@@ -5,10 +5,14 @@ import 'package:user_repository/services/services.dart';
 
 class SupabaseUser extends UserRepository {
   @override
-  Future<void> init(String baseUrl, String apiKey) async {
+  Future<void> init(Map<String, dynamic> data) async {
+    final String? url = data['BASE_URL'];
+    final String? apiKey = data['API_KEY'];
+    assert(url != null || apiKey != null);
+
     await Supabase.initialize(
-      url: baseUrl,
-      anonKey: apiKey,
+      url: url!,
+      anonKey: apiKey!,
     );
   }
 

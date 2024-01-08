@@ -33,7 +33,7 @@ class AppTheme {
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: AppConstants.kDefaultBorderAllRadius)),
               padding: MaterialStatePropertyAll(EdgeInsets.symmetric(
-                  vertical: AppConstants.kDefaultPadding * 1.4)),
+                  vertical: AppConstants.kDefaultPadding * 1.2)),
               foregroundColor:
                   MaterialStatePropertyAll(AppColors.darkBackgroundColor),
               backgroundColor:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gap/gap.dart';
 
 class AppConstants {
@@ -18,4 +19,8 @@ class AppConstants {
       EdgeInsets.only(right: kDefaultPadding / 2);
 
   static const Duration kDefaultDuration = Duration(milliseconds: 600);
+
+  // env variables
+  static String apiUrl = dotenv.env['API_URL'] ?? '';
+  static String apiKey = dotenv.env['API_KEY'] ?? '';
 }
